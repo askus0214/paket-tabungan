@@ -22,6 +22,9 @@ use Filament\Tables\Columns\TextColumn;
 class TransactionResource extends Resource
 {
     protected static ?string $model = Transaction::class;
+    protected static ?string $navigationLabel = 'Transaksi Mutasi';
+    protected static ?string $pluralModelLabel = 'Transaksi Mutasi';
+    protected static ?string $modelLabel = 'Transaksi Mutasi';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -125,4 +128,3 @@ class TransactionResource extends Resource
         ];
     }
 }
-    

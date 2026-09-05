@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        if (auth()->user()->role === 'admin') {
+        if (auth()->user()?->role === 'admin') {
             return redirect('/admin');
         }
 
@@ -46,6 +46,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
+        // Redirect ke landing page / Halaman Utama
         return redirect('/');
     }
 }

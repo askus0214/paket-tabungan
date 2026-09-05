@@ -8,6 +8,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Toggle;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ImageColumn;
 use App\Filament\Resources\PackageResource\Pages;
 use App\Filament\Resources\PackageResource\RelationManagers;
 use App\Models\Package;
@@ -23,27 +24,44 @@ class PackageResource extends Resource
 {
     protected static ?string $model = Package::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    // Label Bahasa Indonesia di Sidebar & Header Page
+    protected static ?string $navigationLabel = 'Paket Lebaran';
+    protected static ?string $modelLabel = 'Paket Lebaran';
+    protected static ?string $pluralModelLabel = 'Paket Lebaran';
+
+    // Icon Sidebar (Gift / Paket)
+    protected static ?string $navigationIcon = 'heroicon-o-gift';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-
                 TextInput::make('title')
-                    ->required(),
+                    ->label('Nama Paket')
+                    ->placeholder('Contoh: Paket Daging Sapi Premium')
+                    ->required()
+                    ->columnSpanFull(),
 
-                Textarea::make('description'),
+                Textarea::make('description')
+                    ->label('Deskripsi Paket')
+                    ->rows(3)
+                    ->columnSpanFull(),
 
                 TextInput::make('price')
+                    ->label('Harga Paket')
+                    ->prefix('Rp')
                     ->numeric()
                     ->required(),
 
-                FileUpload::make('thumbnail'),
+                FileUpload::make('thumbnail')
+                    ->label('Foto / Thumbnail')
+                    ->image()
+                    ->directory('packages')
+                    ->columnSpanFull(),
 
                 Toggle::make('status')
+                    ->label('Status Aktif')
                     ->default(true),
-
             ]);
     }
 
@@ -51,21 +69,35 @@ class PackageResource extends Resource
     {
         return $table
             ->columns([
+                ImageColumn::make('thumbnail')
+                    ->label('Foto')
+                    ->circular(),
 
                 TextColumn::make('title')
-                    ->searchable(),
+                    ->label('Nama Paket')
+                    ->searchable()
+                    ->sortable(),
 
-                TextColumn::make('price'),
+                TextColumn::make('price')
+                    ->label('Harga')
+                    ->money('IDR', locale: 'id')
+                    ->sortable(),
 
                 IconColumn::make('status')
+                    ->label('Status Aktif')
                     ->boolean(),
 
+                TextColumn::make('created_at')
+                    ->label('Dibuat Pada')
+                    ->dateTime('d M Y')
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

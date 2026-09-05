@@ -221,7 +221,7 @@
 
         <aside class="sidebar">
             <div>
-                <div class="brand-logo font-jakarta">Paket Lebaranku</div>
+                <div class="brand-logo font-jakarta">Tabungan Lebaranku</div>
                 <ul class="nav-list">
                     <li class="nav-item">
                         <a href="{{ route('member.dashboard') }}" class="nav-link active">
@@ -257,7 +257,7 @@
                         Member</span>
                     <h1
                         style="font-size: 36px; font-weight: 800; color: #fff; margin: 12px 0 4px 0; tracking-tight: -1px;">
-                        Celengan Digital Anda 🚀</h1>
+                        Tabungan Lebaranku 🚀</h1>
                     <p style="color: #71717a; margin: 0; font-size: 15px;">Pantau capaian dan penuhi target semua
                         program tabungan impianmu.</p>
                 </div>

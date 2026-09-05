@@ -8,12 +8,12 @@ use App\Http\Controllers\MemberDashboardController;
 |--------------------------------------------------------------------------
 | 1. Halaman Utama (Landing Page)
 |--------------------------------------------------------------------------
-| Mengubah '/' yang tadinya memanggil 'welcome', sekarang otomatis dialihkan 
-| (redirect) ke halaman dashboard member agar user langsung diarahkan ke celengannya.
+| Mengembalikan '/' ke view 'welcome' agar ketika akses localhost 
+| langsung muncul Halaman Utama / Landing Page.
 */
 
 Route::get('/', function () {
-    return redirect()->route('member.dashboard');
+    return view('welcome');
 });
 
 /*
@@ -24,7 +24,7 @@ Route::get('/', function () {
 */
 Route::middleware(['auth'])->group(function () {
 
-    // FIX: Menggunakan sintaks ::class yang konsisten dan rapi agar terbaca sempurna oleh Laravel
+    // Route Ajax Mutasi Transaksi
     Route::get('/member/savings/{id}/transactions', [MemberDashboardController::class, 'getTransactions']);
 
     // Halaman Utama Dashboard Member (Tampilan 2 Kolom Premium)

@@ -22,6 +22,9 @@ class SavingResource extends Resource
     protected static ?string $model = Saving::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Data Tabungan';
+    protected static ?string $pluralModelLabel = 'Data Tabungan';
+    protected static ?string $modelLabel = 'Data Tabungan';
 
     public static function form(Form $form): Form
     {
